@@ -1,0 +1,16 @@
+{
+    "SERVER_PORT": "8000",
+    "DEBUG": false,
+    "DATABASE": {
+        "USERNAME": "",
+        "PASSWORD": "",
+        "PORT": "",
+        "PROTOCOL": "",
+        "HOSTURL": "",
+        "DB_NAME": ""
+    },
+    "SECRET_KEY": "",
+    "ALLOWED_HOSTS": [
+        "localhost"
+    ]
+}

@@ -31,7 +31,7 @@ handlers:
 
  
 loggers:
-  hotel_scraping:
+  cheetah:
     level: DEBUG
     handlers: [debug_console, warning_recorder]
 
