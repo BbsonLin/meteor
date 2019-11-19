@@ -1,21 +1,10 @@
 import io
 import os
-import yaml
 import json
+from .interface import IReader
 
 
-class YamlLoader(object):
-    """
-    YAML 載入器
-    """
-
-    @classmethod
-    def load(cls, path):
-        with open(path, "r") as f:
-            return yaml.safe_load(f.read())
-
-
-class JsonLoader(object):
+class JsonReader(IReader):
     """
     Json 載入器
     """

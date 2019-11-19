@@ -4,14 +4,15 @@ import logging.config
 from logging import Logger
 from http import HTTPStatus
 from logging.handlers import RotatingFileHandler, TimedRotatingFileHandler
-from . import loader
+from packages.io.reader import JsonReader, YamlReader
 
 
 class LoggerFactory(object):
     def __init__(self):
         self._format_loader = {
-            ".yml": loader.YamlLoader,
-            ".json": loader.JsonLoader}
+            ".yml": YamlReader,
+            ".json": JsonReader
+        }
 
     def __str__(self):
         for name in logging.Logger.manager.loggerDict:
