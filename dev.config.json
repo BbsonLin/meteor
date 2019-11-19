@@ -12,5 +12,9 @@
     "SECRET_KEY": "",
     "ALLOWED_HOSTS": [
         "localhost"
-    ]
+    ],
+    "LOGGER": {
+        "FILENAME": "logging",
+        "LOGGER_NAME": "cheetah"
+    }
 }

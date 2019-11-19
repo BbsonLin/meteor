@@ -22,7 +22,7 @@ handlers:
     class: logging.handlers.TimedRotatingFileHandler
     level: WARNING
     formatter: detail
-    filename: logs/hotel-scraping-error.log
+    filename: logs/cheetah-error.log
     when: h
     interval: 24
     backupCount: 20
@@ -33,7 +33,7 @@ handlers:
 loggers:
   cheetah:
     level: DEBUG
-    handlers: [debug_console, warning_recorder]
+    handlers: [debug_console]
 
 # Only exist when no sepcific logger name assgin in getLogger function
 # root:

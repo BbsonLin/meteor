@@ -30,8 +30,15 @@ class DatabaseConfig(DataClassJsonMixin):
 
 
 @dataclass
+class LoggerConfig(DataClassJsonMixin):
+    FILENAME: str
+    LOGGER_NAME: str
+
+
+@dataclass
 class AppConfig(DataClassJsonMixin):
     SERVER_PORT: str
     DEBUG: bool
     DATABASE: DatabaseConfig
     ALLOWED_HOSTS: List[str]
+    LOGGER: LoggerConfig

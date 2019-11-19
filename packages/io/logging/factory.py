@@ -2,16 +2,22 @@ import os
 import logging
 import logging.config
 from logging import Logger
+from enum import Enum
 from http import HTTPStatus
 from logging.handlers import RotatingFileHandler, TimedRotatingFileHandler
 from packages.io.reader import JsonReader, YamlReader
 
 
+class LoogerReader(Enum):
+    YAML = ".yml"
+    JSON = ".json"
+
+
 class LoggerFactory(object):
     def __init__(self):
         self._format_loader = {
-            ".yml": YamlReader,
-            ".json": JsonReader
+            LoogerReader.YAML: YamlReader,
+            LoogerReader.JSON: JsonReader
         }
 
     def __str__(self):
@@ -44,9 +50,12 @@ class LoggerFactory(object):
         return source
 
     def _check_extension(self, path: str):
-        support_extension = [".yml", ".json"]
+        support_extension = [
+            LoogerReader.YAML,
+            LoogerReader.JSON
+        ]
         for extension in support_extension:
-            if path.endswith(extension):
+            if path.endswith(extension.value):
                 return extension
         raise Exception("Non-Support Format")
 
@@ -58,12 +67,13 @@ class LoggerFactory(object):
                 if not os.path.exists(pathdir):
                     os.makedirs(pathdir)
 
-    def load_config(self, path: str) -> None:
+    def load_config(self, path: str, formatter: LoogerReader = LoogerReader.YAML) -> None:
         """
         載入已經地義好的 Logger 設定檔，並載入初始化。
         支援 json 與 yaml 格式，
         Args:
             path (str): 檔案來源位置
+            formatter (LoogerReader) 讀取的檔案來源格式
         Raises:
             Exception: 載入失敗
         """

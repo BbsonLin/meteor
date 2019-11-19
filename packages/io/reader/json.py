@@ -1,6 +1,7 @@
 import io
 import os
 import json
+import ujson
 from .interface import IReader
 
 
@@ -13,4 +14,4 @@ class JsonReader(IReader):
     def load(cls, path):
         # io.open 支援 encoding 編碼
         with io.open(path, "r", encoding="utf-8") as f:
-            return json.load(f)
+            return ujson.load(f)
