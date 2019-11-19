@@ -13,6 +13,7 @@ starlette = "*"
 uvicorn = "*"
 ujson = "*"
 gunicorn = "*"
+pyyaml = "*"
 
 [requires]
 python_version = "3.7"
