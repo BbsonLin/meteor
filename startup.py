@@ -1,23 +1,32 @@
-from typing import List
+from typing import List, Optional
 from starlette.applications import Starlette
-from starlette.responses import UJSONResponse
+from starlette.routing import BaseRoute, Mount
+from api.resources import users
+from settings import config, AppConfig
 import uvicorn
 
 
 class AppStartup(object):
-    def __init__(self) -> None:
-        self._routes: List = []
-        self._app: Starlette = Starlette(debug=False)
+
+    def __init__(self, config: AppConfig) -> None:
+        self._routes: List[BaseRoute] = [
+            Mount("/v1.0", routes=users.routes)
+        ]
+        self._app: Starlette = Starlette(debug=config.DEBUG,
+                                         routes=self._routes)
+
+    @property
+    def instance(self) -> Starlette:
+        return self._app
+
+    @classmethod
+    def boot(cls, config: AppConfig) -> Starlette:
+        app = cls(config)
+        return app.instance
 
 
-@app.route('/')
-async def hello(request):
-    return UJSONResponse({'hello': 'world'})
+app = AppStartup.boot(config)
 
-if __name__ == '__main__':
-    uvicorn.run("main:app",
-                host='0.0.0.0',
-                port=8000,
-                workers=4,
-                http="httptools",
-                loop="uvloop")
+# @app.route('/')
+# async def hello(request):
+#     return UJSONResponse({'hello': 'world'})
