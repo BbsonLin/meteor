@@ -42,3 +42,5 @@ class AppConfig(DataClassJsonMixin):
     DATABASE: DatabaseConfig
     ALLOWED_HOSTS: List[str]
     LOGGER: LoggerConfig
+    ALLOW_ORIGINS: List[str]
+    SECRET_KEY: str

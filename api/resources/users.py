@@ -1,30 +1,28 @@
-from typing import List
-from starlette.routing import Route
+from typing import List, Optional
 from starlette.requests import Request
+from starlette.routing import Route
 from starlette.endpoints import HTTPEndpoint
 from starlette.responses import UJSONResponse
 from infrastructures.logging import console_logger
 
 
 class UsersResource(HTTPEndpoint):
-    def get(self, request: Request) -> UJSONResponse:
-        return UJSONResponse({'hello': 'world'})
+    async def get(self, request: Request) -> UJSONResponse:
+        return UJSONResponse({'path': 'Users'})
 
-    def post(self, request: Request) -> UJSONResponse:
-        console_logger.debug(request.json)
-        return UJSONResponse({'hello': 'world'})
+    async def post(self, request: Request) -> UJSONResponse:
+        json = await request.json()
+        return UJSONResponse(json)
 
 
 class UserResource(HTTPEndpoint):
-    def get(self, request: Request) -> UJSONResponse:
-        return UJSONResponse({'hello': 'world'})
+    async def get(self, request: Request) -> UJSONResponse:
+        username = request.path_params["username"]
+        return UJSONResponse({
+            'path': 'User',
+            "username": username
+        })
 
-    def post(self, request: Request) -> UJSONResponse:
-        console_logger.debug(request.json)
-        return UJSONResponse({'hello': 'world'})
 
-
-routes = [
-    Route("/users", UsersResource),
-    Route("/user/{id}", UserResource)
-]
+users_router = Route("/users", UsersResource)
+user_router = Route("/user/{username}", UserResource)
