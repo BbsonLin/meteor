@@ -37,7 +37,6 @@ class LoggerConfig(DataClassJsonMixin):
 
 @dataclass
 class AppConfig(DataClassJsonMixin):
-    SERVER_PORT: str
     DEBUG: bool
     DATABASE: DatabaseConfig
     ALLOWED_HOSTS: List[str]

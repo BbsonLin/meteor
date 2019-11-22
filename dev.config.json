@@ -1,6 +1,5 @@
 {
-    "SERVER_PORT": "8000",
-    "DEBUG": false,
+    "DEBUG": true,
     "DATABASE": {
         "USERNAME": "",
         "PASSWORD": "",

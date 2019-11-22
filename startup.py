@@ -8,7 +8,6 @@ from starlette.middleware.sessions import SessionMiddleware
 from starlette.middleware.httpsredirect import HTTPSRedirectMiddleware
 from api.resources.users import user_router, users_router
 from settings import config, AppConfig
-import uvicorn
 
 
 class AppStartup(object):
