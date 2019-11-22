@@ -18,6 +18,9 @@ dataclasses-json = "*"
 sqlalchemy = "*"
 aiofiles = "*"
 itsdangerous = "*"
+webargs-starlette = "*"
+marshmallow = "*"
+python-multipart = "*"
 
 [requires]
 python_version = "3.7"
