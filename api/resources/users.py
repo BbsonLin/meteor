@@ -3,26 +3,37 @@ from starlette.requests import Request
 from starlette.routing import Route
 from starlette.endpoints import HTTPEndpoint
 from starlette.responses import UJSONResponse
+from api.validators.users import CreateUserValidator, EditUserValidator
 from infrastructures.logging import console_logger
+from packages.webargs import parse_requests
 
 
-class UsersResource(HTTPEndpoint):
+class UsersAPIResource(HTTPEndpoint):
+
     async def get(self, request: Request) -> UJSONResponse:
         return UJSONResponse({'path': 'Users'})
 
-    async def post(self, request: Request) -> UJSONResponse:
-        json = await request.json()
-        return UJSONResponse(json)
-
-
-class UserResource(HTTPEndpoint):
-    async def get(self, request: Request) -> UJSONResponse:
-        username = request.path_params["username"]
+    @parse_requests(CreateUserValidator())
+    async def post(self, request: Request, reqargs: dict) -> UJSONResponse:
+        console_logger.info(reqargs)
         return UJSONResponse({
-            'path': 'User',
-            "username": username
+            'data': reqargs
         })
 
 
-users_router = Route("/users", UsersResource)
-user_router = Route("/user/{username}", UserResource)
+class UserAPIResource(HTTPEndpoint):
+    async def get(self, request: Request) -> UJSONResponse:
+        return UJSONResponse({
+            "user_id": request.path_params["user_id"]
+        })
+
+    @parse_requests(EditUserValidator())
+    async def patch(self, request: Request, reqargs: dict) -> UJSONResponse:
+        return UJSONResponse({
+            'data': reqargs,
+            "user_id": request.path_params["user_id"]
+        })
+
+
+users_router = Route("/users", UsersAPIResource)
+user_router = Route("/users/{user_id}", UserAPIResource)
