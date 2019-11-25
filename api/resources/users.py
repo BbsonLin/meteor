@@ -4,6 +4,7 @@ from starlette.routing import Route
 from starlette.endpoints import HTTPEndpoint
 from starlette.responses import UJSONResponse
 from api.validators.users import CreateUserValidator, EditUserValidator
+from apps.datacontracts.commands import CreateUserCommand, EditUserCommand
 from infrastructures.logging import console_logger
 from packages.webargs import parse_requests
 
@@ -11,13 +12,14 @@ from packages.webargs import parse_requests
 class UsersAPIResource(HTTPEndpoint):
 
     async def get(self, request: Request) -> UJSONResponse:
-        return UJSONResponse({'path': 'Users'})
+        return UJSONResponse({"path": "Users"})
 
     @parse_requests(CreateUserValidator())
     async def post(self, request: Request, reqargs: dict) -> UJSONResponse:
         console_logger.info(reqargs)
+        command = CreateUserCommand(**reqargs)
         return UJSONResponse({
-            'data': reqargs
+            "data": reqargs
         })
 
 
@@ -29,8 +31,9 @@ class UserAPIResource(HTTPEndpoint):
 
     @parse_requests(EditUserValidator())
     async def patch(self, request: Request, reqargs: dict) -> UJSONResponse:
+        command = EditUserCommand(**reqargs)
         return UJSONResponse({
-            'data': reqargs,
+            "data": reqargs,
             "user_id": request.path_params["user_id"]
         })
 
