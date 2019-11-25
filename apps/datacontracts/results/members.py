@@ -2,8 +2,8 @@ from dataclasses import dataclass
 
 
 @dataclass(frozen=True)
-class UserResult(object):
-    user_id: str
+class MemberResult(object):
+    member_id: str
     identity: str
     cellphone: str
     family_name: str
@@ -11,6 +11,6 @@ class UserResult(object):
 
 
 @dataclass(frozen=True)
-class UserLoginResult(object):
-    user_id: str
+class MemberLoginResult(object):
+    member_id: str
     invitation_code: str

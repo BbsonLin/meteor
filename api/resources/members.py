@@ -3,40 +3,40 @@ from starlette.requests import Request
 from starlette.routing import Route
 from starlette.endpoints import HTTPEndpoint
 from starlette.responses import UJSONResponse
-from api.validators.users import CreateUserValidator, EditUserValidator
-from apps.datacontracts.commands import CreateUserCommand, EditUserCommand
+from api.validators.members import CreateMemberValidator, EditMemberValidator
+from apps.datacontracts.commands import CreateMemberCommand, EditMemberCommand
 from infrastructures.logging import console_logger
 from packages.webargs import parse_requests
 
 
-class UsersAPIResource(HTTPEndpoint):
+class MembersAPIResource(HTTPEndpoint):
 
     async def get(self, request: Request) -> UJSONResponse:
-        return UJSONResponse({"path": "Users"})
+        return UJSONResponse({"path": "Members"})
 
-    @parse_requests(CreateUserValidator())
+    @parse_requests(CreateMemberValidator())
     async def post(self, request: Request, reqargs: dict) -> UJSONResponse:
         console_logger.info(reqargs)
-        command = CreateUserCommand(**reqargs)
+        command = CreateMemberCommand(**reqargs)
         return UJSONResponse({
             "data": reqargs
         })
 
 
-class UserAPIResource(HTTPEndpoint):
+class MemberAPIResource(HTTPEndpoint):
     async def get(self, request: Request) -> UJSONResponse:
         return UJSONResponse({
-            "user_id": request.path_params["user_id"]
+            "member_id": request.path_params["member_id"]
         })
 
-    @parse_requests(EditUserValidator())
+    @parse_requests(EditMemberValidator())
     async def patch(self, request: Request, reqargs: dict) -> UJSONResponse:
-        command = EditUserCommand(**reqargs)
+        command = EditMemberCommand(**reqargs)
         return UJSONResponse({
             "data": reqargs,
-            "user_id": request.path_params["user_id"]
+            "member_id": request.path_params["member_id"]
         })
 
 
-users_router = Route("/users", UsersAPIResource)
-user_router = Route("/users/{user_id}", UserAPIResource)
+members_router = Route("/members", MembersAPIResource)
+member_router = Route("/members/{member_id}", MemberAPIResource)
