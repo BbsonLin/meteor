@@ -14,15 +14,21 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/v1.0/users",
+							"raw": "http://{{host}}/{{version}}/members/:member_id",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"{{host}}"
 							],
-							"port": "8000",
 							"path": [
-								"v1.0",
-								"users"
+								"{{version}}",
+								"members",
+								":member_id"
+							],
+							"variable": [
+								{
+									"key": "member_id",
+									"value": ""
+								}
 							]
 						}
 					},
@@ -34,15 +40,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/v1.0/users",
+							"raw": "http://{{host}}/{{version}}/members",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"{{host}}"
 							],
-							"port": "8000",
 							"path": [
-								"v1.0",
-								"users"
+								"{{version}}",
+								"members"
 							]
 						}
 					},
@@ -70,16 +75,21 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8000/v1.0/users/1289421",
+							"raw": "http://{{host}}/{{version}}/members/:member_id",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"{{host}}"
 							],
-							"port": "8000",
 							"path": [
-								"v1.0",
-								"users",
-								"1289421"
+								"{{version}}",
+								"members",
+								":member_id"
+							],
+							"variable": [
+								{
+									"key": "member_id",
+									"value": ""
+								}
 							]
 						}
 					},
@@ -107,15 +117,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8000/v1.0/users",
+							"raw": "http://{{host}}/{{version}}/members",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"{{host}}"
 							],
-							"port": "8000",
 							"path": [
-								"v1.0",
-								"users"
+								"{{version}}",
+								"members"
 							]
 						}
 					},
@@ -132,9 +141,33 @@
 					"name": "會員登入",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"cellphone\": \"0919343379\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": ""
+							"raw": "http://{{host}}/{{version}}/login",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{version}}",
+								"login"
+							]
 						}
 					},
 					"response": []
