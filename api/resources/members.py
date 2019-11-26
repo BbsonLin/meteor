@@ -43,5 +43,3 @@ class MemberAPIResource(HTTPEndpoint):
 
 members_router = Route("/members", MembersAPIResource)
 member_router = Route("/members/{member_id}", MemberAPIResource)
-
-
