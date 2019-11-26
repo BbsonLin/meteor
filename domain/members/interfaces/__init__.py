@@ -1,0 +1,1 @@
+from .repositotry import IMemberRepository

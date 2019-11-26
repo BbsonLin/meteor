@@ -6,7 +6,7 @@ from starlette.middleware.trustedhost import TrustedHostMiddleware
 from starlette.middleware.cors import CORSMiddleware
 from starlette.middleware.sessions import SessionMiddleware
 from starlette.middleware.httpsredirect import HTTPSRedirectMiddleware
-from api.resources.users import user_router, users_router
+from api.resources.members import member_router, members_router
 from settings import config, AppConfig
 
 
@@ -22,8 +22,8 @@ class AppStartup(object):
     def _register_routers(self) -> List[BaseRoute]:
         app_routes: List[BaseRoute] = [
             Mount("/v1.0", routes=[
-                users_router,
-                user_router
+                members_router,
+                member_router
             ])
         ]
         return app_routes

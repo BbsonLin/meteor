@@ -1,1 +1,1 @@
-from .users import UserResult, UserLoginResult
+from .members import MemberResult, MemberLoginResult

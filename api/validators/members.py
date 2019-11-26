@@ -3,7 +3,7 @@ from decimal import Decimal
 from marshmallow import Schema, fields, post_load, ValidationError
 
 
-class CreateUserValidator(Schema):
+class CreateMemberValidator(Schema):
     # "data_key" new naming of load_from and dump_to
     identity = fields.String(data_key="identity", required=True)
     cellphone = fields.String(data_key="cellphone", required=True)
@@ -14,7 +14,7 @@ class CreateUserValidator(Schema):
         strict = True
 
 
-class EditUserValidator(Schema):
+class EditMemberValidator(Schema):
     # "data_key" new naming of load_from and dump_to
     identity = fields.Decimal(data_key="identity")
     cellphone = fields.Int(data_key="cellphone")
