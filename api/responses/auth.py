@@ -5,8 +5,7 @@ from packages.marshmallow import DumpSchema
 
 
 class MemberLoginResponse(DumpSchema):
-    member_id = fields.UUID(data_key="member_id", dump_only=True)
-    invitation_code = fields.UUID(data_key="invitation_code", dump_only=True)
+    cellphone = fields.UUID(data_key="cellphone", dump_only=True)
 
     class Meta:
         strict = True
