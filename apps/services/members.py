@@ -12,13 +12,13 @@ class MemberService(object):
 
     def create_member(self, command: CreateMemberCommand):
         try:
-            # member_id: MemberId = self._order_repo.generate_id()
-            # order = Member(member_id,
-            #                command.identity,
-            #                command.cellphone,
-            #                command.family_name,
-            #                command.cellphone)
-            # self._order_repo.save(order)
+            # member_id: MemberId = self._member_repo.generate_id()
+            # member = Member(member_id,
+            #                 command.identity,
+            #                 command.cellphone,
+            #                 command.family_name,
+            #                 command.cellphone)
+            # self.member_repo.save(member)
             # self._session.commit()
             return True
             # return CreatedOrderAssembler.to_result(order)
@@ -31,3 +31,6 @@ class MemberService(object):
 
     def login(self, command: LoginCommand):
         pass
+
+
+member_service = MemberService()

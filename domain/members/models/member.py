@@ -11,6 +11,7 @@ class Member(object):
         self._family_name = family_name
         self._given_name = given_name
 
+
     @property
     def id(self) -> MemberId:
         return self._id

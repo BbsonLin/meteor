@@ -42,7 +42,7 @@
         {
             "type": int, //禮物所許的類型值 e.g: 0, 1, 2, 3, 4
             "description": string, //禮物的介紹描述
-            "gitf_id": string, // 禮物的 ID
+            "gift_id": string, // 禮物的 ID
             "invitation": {
                 "code": string, //禮物的邀請碼
                 "url": string //禮物的邀請轉發連結

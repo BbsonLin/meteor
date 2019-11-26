@@ -2,7 +2,7 @@
 ---
 
 ## 1.1 會員登入
-描述： 透過 `cellphone` 手機登入 *(目前先不考慮 Auth Token )*
+描述： 透過 `mobile` 手機登入 *(目前先不考慮 Auth Token )*
 
 ### 接口定義
 
@@ -14,7 +14,7 @@
 ### Request 請求參數
 ```json
 {
-    "cellphone": string, // 會員手機號碼
+    "mobile": string, // 會員手機號碼
 }
 ```
 
