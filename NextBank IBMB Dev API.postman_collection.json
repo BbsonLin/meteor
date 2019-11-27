@@ -141,6 +141,28 @@
 				}
 			],
 			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "取得單一會員",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/v1.0/members/1/gifts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"v1.0",
+						"members",
+						"1",
+						"gifts"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
