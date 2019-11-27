@@ -175,7 +175,7 @@
 				{
 					"name": "取得單一會員禮物",
 					"request": {
-						"method": "POST",
+						"method": "GET",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -185,7 +185,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://{{host}}/{{version}}/members/{{member_id}}/gifts",
+							"raw": "http://{{host}}/{{version}}/members/:member_id/gifts",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
@@ -193,8 +193,14 @@
 							"path": [
 								"{{version}}",
 								"members",
-								"{{member_id}}",
+								":member_id",
 								"gifts"
+							],
+							"variable": [
+								{
+									"key": "member_id",
+									"value": "{{member_id}}"
+								}
 							]
 						}
 					},
