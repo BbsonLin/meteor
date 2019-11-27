@@ -10,7 +10,8 @@
     },
     "SECRET_KEY": "a8e2e324b77189a7f17d1a6c8f8e9a3730a730e1a302d752a621cf5e802201c9",
     "ALLOWED_HOSTS": [
-        "localhost"
+        "localhost",
+        "ncb.ngrok.io"
     ],
     "LOGGER": {
         "FILENAME": "logging",
