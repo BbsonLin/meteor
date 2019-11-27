@@ -7,6 +7,7 @@ from starlette.middleware.cors import CORSMiddleware
 from starlette.middleware.sessions import SessionMiddleware
 from starlette.middleware.httpsredirect import HTTPSRedirectMiddleware
 from api.resources.members import member_router, members_router
+from api.resources.gifts import gifts_router
 from api.resources.auth import login_router
 from settings import config, AppConfig
 
@@ -25,11 +26,12 @@ class AppStartup(object):
             Mount("/v1.0", routes=[
                 members_router,
                 member_router,
-                login_router
+                login_router,
+                gifts_router
             ])
         ]
         return app_routes
-
+    
     def _register_middleware(self, config: AppConfig) -> List[Optional[Middleware]]:
         middleware: List[Optional[Middleware]] = [
             Middleware(TrustedHostMiddleware, allowed_hosts=config.ALLOWED_HOSTS),
