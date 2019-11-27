@@ -22,10 +22,8 @@
 ```json
 {
     "success": true,
-    "data": [
-        {
+    "data": {
             "member_id": string //會員的唯一 ID
         }
-    ]
 }
 ```
