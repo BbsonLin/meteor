@@ -1,2 +1,2 @@
 from .id import MemberId
-from .memeber import Member
+from .member import Member
