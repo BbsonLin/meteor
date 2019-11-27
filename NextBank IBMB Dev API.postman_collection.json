@@ -129,14 +129,7 @@
 						}
 					},
 					"response": []
-				}
-			],
-			"description": "該目錄是用來建立 Member 的的 API",
-			"protocolProfileBehavior": {}
-		},
-		{
-			"name": "Auth ( 驗證 )",
-			"item": [
+				},
 				{
 					"name": "會員登入",
 					"request": {
@@ -173,29 +166,99 @@
 					"response": []
 				}
 			],
+			"description": "該目錄是用來建立 Member 的的 API",
 			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "取得單一會員",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8000/v1.0/members/1/gifts",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8000",
-					"path": [
-						"v1.0",
-						"members",
-						"1",
-						"gifts"
+			"name": "Gifts（禮物）",
+			"item": [
+				{
+					"name": "取得單一會員禮物",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{host}}/{{version}}/members/{{member_id}}/gifts",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{version}}",
+								"members",
+								"{{member_id}}",
+								"gifts"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "取得單一會員禮物",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://{{host}}/{{version}}/members/:member_id/gifts",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{version}}",
+										"members",
+										":member_id",
+										"gifts"
+									],
+									"variable": [
+										{
+											"key": "member_id",
+											"value": "{{member_id}}"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "date",
+									"value": "Wed, 27 Nov 2019 04:03:50 GMT"
+								},
+								{
+									"key": "server",
+									"value": "uvicorn"
+								},
+								{
+									"key": "content-length",
+									"value": "157"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"type\": \"Type\",\n            \"type_name\": \"加息卷\",\n            \"description\": \"description\",\n            \"gift_id\": \"gift_id\",\n            \"invitation\": {\n                \"code\": \"XYXYXXX\",\n                \"url\": \"url\"\n            }\n        }\n    ]\n}"
+						}
 					]
 				}
-			},
-			"response": []
+			],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"event": [

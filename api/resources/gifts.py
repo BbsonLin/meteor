@@ -3,8 +3,6 @@ from starlette.requests import Request
 from starlette.routing import Route
 from starlette.endpoints import HTTPEndpoint
 from starlette.responses import UJSONResponse
-# from api.validators.members import CreateMemberValidator, EditMemberValidator
-#from apps.datacontracts.commands import CreateMemberCommand, EditMemberCommand
 from infrastructures.logging import console_logger
 from packages.webargs import parse_requests
 import json
