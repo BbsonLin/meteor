@@ -21,6 +21,8 @@ itsdangerous = "*"
 webargs-starlette = "*"
 marshmallow = "*"
 python-multipart = "*"
+pyodbc = "*"
+pymysql = "*"
 
 [requires]
 python_version = "3.7"
