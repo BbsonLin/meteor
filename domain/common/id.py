@@ -1,4 +1,5 @@
 import abc
+import uuid
 from typing import TypeVar, Type, cast
 from datetime import datetime
 from .valueobj import ValueObject
@@ -38,12 +39,12 @@ class EntityId(ValueObject):
 
     def __str__(self) -> str:
         # 取得字串型別的 Entity Id
-        createtd_at = self.createtd_at.strftime("%Y%m%d")
+        createtd_at = self.createtd_at.strftime("%Y%m%d%H%M%S")
         return "{code}-{date}-{sn}" \
             .format(code=self.code, date=self.createtd_at, sn=self.serial_no)
 
     def __repr__(self) -> str:
-        return "<{class}: code={code}, createtd_at={date}, serial_no={sn}" \
+        return "<{class}>: code={code}, createtd_at={date}, serial_no={sn}" \
             .format(type(self).__name__, code=self.code, date=self.createtd_at, sn=self.serial_no)
 
     # TODO: 實現 Iterable
