@@ -9,12 +9,15 @@ from starlette.middleware.httpsredirect import HTTPSRedirectMiddleware
 from api.resources.members import member_router, members_router
 from api.resources.gifts import gifts_router
 from api.resources.auth import login_router
-from settings import config, AppConfig
+from infrastructures.persistences.sqlalchemy.middlewares import db_adapter, SQLAlchemyAdapter
+from infrastructures.persistences.sqlalchemy.middlewares import SQLAlchemySessionMiddleware
+from settings import app_config, AppConfig
 
 
 class AppStartup(object):
 
-    def __init__(self, config: AppConfig) -> None:
+    def __init__(self, config: AppConfig, database_adapter: SQLAlchemyAdapter) -> None:
+        self._database_adapter = database_adapter
         self._middlewares: List[Optional[Middleware]] = self._register_middleware(config)
         self._routes: List[BaseRoute] = self._register_routers()
         self._app: Starlette = Starlette(debug=config.DEBUG,
@@ -31,11 +34,12 @@ class AppStartup(object):
             ])
         ]
         return app_routes
-    
+
     def _register_middleware(self, config: AppConfig) -> List[Optional[Middleware]]:
         middleware: List[Optional[Middleware]] = [
             Middleware(TrustedHostMiddleware, allowed_hosts=config.ALLOWED_HOSTS),
             Middleware(CORSMiddleware, allow_origins=config.ALLOW_ORIGINS),
+            Middleware(SQLAlchemySessionMiddleware, alchemy=self._database_adapter)
             # TODO 請加入 HTTPSRedirectMiddleware 與 SessionMiddleware (若需要 secret_key，已放在參考設定檔)
         ]
         return middleware
@@ -45,9 +49,9 @@ class AppStartup(object):
         return self._app
 
     @classmethod
-    def boot(cls, config: AppConfig) -> Starlette:
-        app = cls(config)
+    def boot(cls, config: AppConfig, db_adapter: SQLAlchemyAdapter) -> Starlette:
+        app = cls(config, db_adapter)
         return app.instance
 
 
-app = AppStartup.boot(config)
+app = AppStartup.boot(app_config, db_adapter)
