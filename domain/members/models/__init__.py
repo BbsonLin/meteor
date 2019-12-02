@@ -1,2 +1,3 @@
 from .id import MemberId
-from .member import Member
+from .member import MemberDO
+

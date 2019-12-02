@@ -3,14 +3,13 @@ from datetime import datetime
 from .id import MemberId
 
 
-class Member(object):
+class MemberDO(object):
     def __init__(self, id: MemberId, identity: str, cellphone: str, family_name: str, given_name: str) -> None:
         self._id = id
         self._identity = identity
         self._cellphone = cellphone
         self._family_name = family_name
         self._given_name = given_name
-
 
     @property
     def id(self) -> MemberId:
@@ -47,7 +46,7 @@ class Member(object):
         return self is other
 
     def __repr__(self) -> str:
-        return "<MemberId: id:{}, \n\
+        return "<MemberDO: id:{}, \n\
                 identity={}, \n\
                 cellphone={}, \n\
                 family_name={}, \n\

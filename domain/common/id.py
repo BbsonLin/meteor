@@ -1,11 +1,12 @@
 import abc
-import uuid
-from typing import TypeVar, Type, cast
 from datetime import datetime
+from typing import TypeVar, Type, cast
 from .valueobj import ValueObject
 
 
 class EntityId(ValueObject):
+    DATETIME_FORMAT = "%Y%m%d%H%M%S"
+
     @abc.abstractmethod
     def __init__(self, code: str, serial_no: int, createtd_at: datetime) -> None:
         self._code = code
@@ -14,6 +15,18 @@ class EntityId(ValueObject):
             raise ValueError("Serial No must larger than 0.")
         self._serial_no = serial_no
         self._createtd_at = createtd_at
+
+    @classmethod
+    def from_string(cls, entity_id: str):
+        CODE_IDX = 0
+        CREATED_IDX = 1
+        SERIAL_NO_IDX = 2
+        if len(entity_id.split("-")) != 3:
+            raise Exception("Format Error !")
+
+        slices = entity_id.split("-")
+        created_at = datetime.strptime(slices[CREATED_IDX], cls.DATETIME_FORMAT)
+        return cls(slices[CODE_IDX], int(slices[SERIAL_NO_IDX]), created_at)
 
     @property
     def code(self) -> str:
@@ -39,7 +52,7 @@ class EntityId(ValueObject):
 
     def __str__(self) -> str:
         # 取得字串型別的 Entity Id
-        createtd_at = self.createtd_at.strftime("%Y%m%d%H%M%S")
+        createtd_at = self.createtd_at.strftime(self.DATETIME_FORMAT)
         return "{code}-{date}-{sn}" \
             .format(code=self.code, date=self.createtd_at, sn=self.serial_no)
 
