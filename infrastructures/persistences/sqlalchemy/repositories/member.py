@@ -1,5 +1,5 @@
 from datetime import datetime
-from sqlalchemy import func
+from sqlalchemy.sql import func
 from sqlalchemy.sql.expression import false
 from sqlalchemy.orm import Session
 from domain.members.models import MemberDO, MemberId
@@ -11,9 +11,9 @@ class MemberRepository(IMemberRepository):
     def __init__(self, db_session: Session) -> None:
         self._db_session = db_session
 
-    def _transfer_to(self, db_member: Member) -> MemberDO:
+    def _assemble_to(self, db_member: Member) -> MemberDO:
         return MemberDO(
-            id=MemberId.from_string(db_member.member_id),
+            id=MemberId.translate(db_member.member_id),
             identity=db_member.identity,
             cellphone=db_member.cellphone,
             family_name=db_member.family_name,
@@ -42,10 +42,10 @@ class MemberRepository(IMemberRepository):
         if db_member is None:
             raise Exception("Member Not Found")
 
-        return self._transfer_to(db_member)
+        return self._assemble_to(db_member)
 
     def generate_id(self) -> MemberId:
-        max_id = self._db_session.query(func.max(Member.member_id)).scalar()
+        max_id = self._db_session.query(func.count(Member.member_id)).scalar()
         # 如果 為 NONE 表示沒有資料，則建立 0
-        curr_id = max_id + 1 if max_id is not None else 0
+        curr_id = max_id + 1 if max_id is not None else 1
         return MemberId(curr_id, datetime.utcnow())
