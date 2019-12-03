@@ -22,3 +22,7 @@ class EditMemberCommand(object):
 @dataclass(frozen=True)
 class LoginCommand(object):
     cellphone: str
+
+@dataclass(frozen=True)
+class GetMemberByIdCommand(object):
+    member_id: str

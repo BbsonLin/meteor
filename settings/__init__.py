@@ -1,7 +1,8 @@
 import os
 from typing import Dict
 from packages.io.reader import JsonReader
-from .config import AppConfig, ConfigEnv, APP_CONFIG_NAME, FILENAME_FORMATTER
+from .config import AppConfig, DatabaseConfig, LoggerConfig
+from .config import ConfigEnv, APP_CONFIG_NAME, FILENAME_FORMATTER
 
 """
 設定檔
@@ -22,4 +23,4 @@ class AppConfigFactory(object):
 
 
 # Initialized
-config: AppConfig = AppConfigFactory.load(APP_CONFIG_NAME, ConfigEnv.DEV)
+app_config: AppConfig = AppConfigFactory.load(APP_CONFIG_NAME, ConfigEnv.DEV_MYSQL)

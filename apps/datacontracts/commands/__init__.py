@@ -1,1 +1,2 @@
-from .members import CreateMemberCommand, EditMemberCommand, LoginCommand
+from .members import CreateMemberCommand, EditMemberCommand, GetMemberByIdCommand
+from .members import LoginCommand

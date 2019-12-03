@@ -1,0 +1,27 @@
+{
+    "DEBUG": true,
+    "DATABASE": {
+        "USERNAME": "root",
+        "PASSWORD": "Pass@word1",
+        "HOSTURL": "localhost",
+        "PORT": "3306",
+        "RDBMS": "mysql",
+        "PYDRIVER": "pymysql",
+        "DB_NAME": "NextBankIBMB",
+        "DB_DRIVER": null,
+        "DSN": null,
+        "ECHO": true
+    },
+    "SECRET_KEY": "a8e2e324b77189a7f17d1a6c8f8e9a3730a730e1a302d752a621cf5e802201c9",
+    "ALLOWED_HOSTS": [
+        "localhost",
+        "ncb.ngrok.io"
+    ],
+    "LOGGER": {
+        "FILENAME": "logging",
+        "LOGGER_NAME": "cheetah"
+    },
+    "ALLOW_ORIGINS": [
+        "*"
+    ]
+}
