@@ -2,8 +2,10 @@ from datetime import datetime
 from sqlalchemy.sql import func
 from sqlalchemy.sql.expression import false
 from sqlalchemy.orm import Session
+from domain.common import DomainException
 from domain.members.models import MemberDO, MemberId
 from domain.members.interfaces import IMemberRepository
+from domain.members.errors import MemberErrorCode
 from infrastructures.persistences.sqlalchemy.models import Member
 
 
@@ -40,7 +42,7 @@ class MemberRepository(IMemberRepository):
         ).scalar()
 
         if db_member is None:
-            raise Exception("Member Not Found")
+            raise DomainException(MemberErrorCode.MEMBER_NOT_FOUND)
 
         return self._assemble_to(db_member)
 

@@ -1,6 +1,9 @@
+import traceback
 from datetime import datetime
 from typing import TypeVar, Type, cast
 from domain.common import EntityId
+from domain.common import DomainException
+from domain.members.errors import MemberErrorCode
 
 
 class MemberId(EntityId):
@@ -20,11 +23,11 @@ class MemberId(EntityId):
         SERIAL_NO_IDX = 2
 
         if len(source.split("-")) != 3:
-            raise Exception("Format Error !")
+            raise DomainException(MemberErrorCode.MEMBER_ID_FORMAT_INCORRECT)
 
         slices = source.split("-")
         if slices[CODE_IDX] != cls.code:
-            raise Exception("Parsing code is incorrect")
+            raise DomainException(MemberErrorCode.MEMBER_ID_FORMAT_INCORRECT)
         created_at = datetime.strptime(slices[CREATED_TIME_IDX], cls.datetime_format)
         return cls(int(slices[SERIAL_NO_IDX]), created_at)
 
@@ -38,7 +41,7 @@ class MemberId(EntityId):
 
     def _check_serial_no(self, serial_no: int) -> int:
         if serial_no < 0:
-            raise ValueError("Serial No must larger than 0.")
+            raise DomainException(MemberErrorCode.MEMBER_SEIRAL_NO_INCORRECT, stack_trace=traceback.format_exc())
         return serial_no
 
     def _make_identifier(self):

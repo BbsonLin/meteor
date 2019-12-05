@@ -1,10 +1,10 @@
 from settings import DatabaseConfig
 from .adapter import SQLAlchemyAdapter
-from starlette.middleware.base import BaseHTTPMiddleware
+from starlette.middleware.base import BaseHTTPMiddleware, ASGIApp
 
 
 class SQLAlchemySessionMiddleware(BaseHTTPMiddleware):
-    def __init__(self, app, alchemy: SQLAlchemyAdapter):
+    def __init__(self, app: ASGIApp, alchemy: SQLAlchemyAdapter):
         super().__init__(app)
         self._alchemy = alchemy
 
