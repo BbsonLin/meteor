@@ -1,0 +1,1 @@
+from domain.gifts.interfaces.repository import IGiftRepository
