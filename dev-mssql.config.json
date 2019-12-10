@@ -8,8 +8,8 @@
         "RDBMS": "mssql",
         "PYDRIVER": "pyodbc",
         "DB_NAME": "NextBankIBMB",
-        "DB_DRIVER": "ODBC Driver 13 for SQL Server",
-        "DSN": "NEXTBANK_IBMB_CHT_SERVER_ODBC",
+        "DB_DRIVER": "ODBC Driver 17 for SQL Server",
+        "DSN": "NCB_IBMB_CHT_SERVER_ODBC17",
         "ECHO": true
     },
     "SECRET_KEY": "a8e2e324b77189a7f17d1a6c8f8e9a3730a730e1a302d752a621cf5e802201c9",
