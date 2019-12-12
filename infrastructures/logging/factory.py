@@ -4,7 +4,7 @@ from settings import AppConfig
 from packages.io.logging import LoggerFactory
 
 
-class ConsoleLogger(object):
+class CheetahLogger(object):
     @classmethod
     def create(cls, config: AppConfig) -> Logger:
         # Read config filename and path

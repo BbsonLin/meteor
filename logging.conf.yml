@@ -7,7 +7,7 @@ formatters:
     format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s' # The default format for asctime is %Y-%m-%d %H:%M:%S
   detail:
     format:  | # multiple newline
-            ====> %(asctime)s - %(name)s - %(levelname)s - module > %(module)s (line %(lineno)d) - [pid %(process)d]
+            ========> %(asctime)s - %(name)s - %(levelname)s - module > %(module)s (line %(lineno)d) - [pid %(process)d]
             $> %(message)s
     datefmt: ''
 
@@ -18,22 +18,33 @@ handlers:
     formatter: simple
     stream: ext://sys.stdout
 
-  warning_recorder:
+  debug_fileman:
     class: logging.handlers.TimedRotatingFileHandler
-    level: WARNING
+    level: DEBUG
     formatter: detail
-    filename: logs/cheetah-error.log
+    filename: logs/cheetah-debug.log
     when: h
     interval: 24
     backupCount: 20
     encoding: utf8
     utc: True
 
+  # warning_recorder:
+  #   class: logging.handlers.TimedRotatingFileHandler
+  #   level: WARNING
+  #   formatter: detail
+  #   filename: logs/cheetah-error.log
+  #   when: h
+  #   interval: 24
+  #   backupCount: 20
+  #   encoding: utf8
+  #   utc: True
+
  
 loggers:
   cheetah:
     level: DEBUG
-    handlers: [debug_console]
+    handlers: [debug_console, debug_fileman]
 
 # Only exist when no sepcific logger name assgin in getLogger function
 # root:

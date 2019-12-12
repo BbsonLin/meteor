@@ -4,6 +4,7 @@ from starlette.responses import Response, UJSONResponse
 from starlette.middleware.base import BaseHTTPMiddleware, ASGIApp
 from starlette.exceptions import HTTPException
 from .translator import ErrorRespTranslator
+from infrastructures.logging import cheetah_logger
 from http import HTTPStatus
 import traceback
 
@@ -21,5 +22,5 @@ class ExceptHandlerMiddleware(BaseHTTPMiddleware):
             return translator.to_response()
         except Exception as ex:
             translator = ErrorRespTranslator("INTERNAL_SERVER_ERROR", "Internal Server Error")
+            cheetah_logger.debug(traceback.format_exc())
             return translator.to_response(HTTPStatus.INTERNAL_SERVER_ERROR)
-

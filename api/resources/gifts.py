@@ -3,7 +3,7 @@ from starlette.requests import Request
 from starlette.routing import Route
 from starlette.endpoints import HTTPEndpoint
 from starlette.responses import UJSONResponse
-from infrastructures.logging import console_logger
+from infrastructures.logging import cheetah_logger
 from packages.webargs import parse_requests
 import json
 

@@ -1,5 +1,5 @@
 from settings import app_config
-from .console import ConsoleLogger
+from .factory import CheetahLogger
 
 
-console_logger = ConsoleLogger.create(app_config)
+cheetah_logger = CheetahLogger.create(app_config)

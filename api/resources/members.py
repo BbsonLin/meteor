@@ -9,7 +9,7 @@ from apps.datacontracts.commands import CreateMemberCommand, EditMemberCommand
 from apps.datacontracts.commands import GetMemberByIdCommand
 from apps.datacontracts.results import MemberResult, MemberLoginResult
 from apps.services import member_service
-from infrastructures.logging import console_logger
+from infrastructures.logging import cheetah_logger
 from packages.webargs import parse_requests
 
 
@@ -20,7 +20,7 @@ class MembersAPIResource(HTTPEndpoint):
 
     @parse_requests(CreateMemberValidator())
     async def post(self, request: Request, reqargs: dict) -> UJSONResponse:
-        # console_logger.info(reqargs)
+        # cheetah_logger.info(reqargs)
         command = CreateMemberCommand(**reqargs)
         result: MemberResult = member_service.create(command)
         resp = MemberResponse().dump(result)
