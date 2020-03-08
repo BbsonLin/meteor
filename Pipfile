@@ -23,6 +23,7 @@ marshmallow = "*"
 python-multipart = "*"
 pyodbc = "*"
 pymysql = "*"
+starlette-context = "*"
 
 [requires]
 python_version = "3.7"
