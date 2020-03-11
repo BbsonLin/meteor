@@ -1,6 +1,6 @@
 from typing import List, Optional
 from starlette.requests import Request
-from starlette.routing import Route
+from starlette.routing import Route, Mount
 from starlette.endpoints import HTTPEndpoint
 from starlette.responses import UJSONResponse
 from api.validators.members import CreateMemberValidator, EditMemberValidator
@@ -8,7 +8,7 @@ from api.responses.members import MemberResponse
 from apps.datacontracts.commands import CreateMemberCommand, EditMemberCommand
 from apps.datacontracts.commands import GetMemberByIdCommand
 from apps.datacontracts.results import MemberResult, MemberLoginResult
-from apps.services import member_service
+from apps.services.members import member_service
 from infrastructures.logging import cheetah_logger
 from packages.webargs import parse_requests
 
@@ -24,7 +24,10 @@ class MembersAPIResource(HTTPEndpoint):
         command = CreateMemberCommand(**reqargs)
         result: MemberResult = member_service.create(command)
         resp = MemberResponse().dump(result)
-        return UJSONResponse(resp)
+        return UJSONResponse({
+            "success": True,
+            "data": resp
+        })
 
 
 class MemberAPIResource(HTTPEndpoint):
@@ -43,5 +46,9 @@ class MemberAPIResource(HTTPEndpoint):
         })
 
 
-members_router = Route("/members", MembersAPIResource)
-member_router = Route("/members/{member_id}", MemberAPIResource)
+members_profile_routes = Mount(
+    "/members", routes=[
+        Route("/", MembersAPIResource),
+        Route("/{member_id}", MemberAPIResource),
+    ]
+)

@@ -51,3 +51,4 @@ class MemberRepository(IMemberRepository):
         # 如果 為 NONE 表示沒有資料，則建立 0
         curr_id = max_id + 1 if max_id is not None else 1
         return MemberId(curr_id, datetime.utcnow())
+
