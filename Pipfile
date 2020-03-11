@@ -24,6 +24,7 @@ python-multipart = "*"
 pyodbc = "*"
 pymysql = "*"
 starlette-context = "*"
+colorlog = "*"
 
 [requires]
 python_version = "3.7"

@@ -17,6 +17,7 @@ class SQLAlchemyAdapter(object):
     def register_session(self) -> None:
         self._curr_session = self._session_regisetry()
 
+    @property
     def session(self) -> Session:
         if self._curr_session is None:
             self.register_session()
@@ -26,4 +27,4 @@ class SQLAlchemyAdapter(object):
         self._session_regisetry.remove()
 
 
-db_adapter = SQLAlchemyAdapter(app_config.DATABASE)
+database_adapter = SQLAlchemyAdapter(app_config.DATABASE)

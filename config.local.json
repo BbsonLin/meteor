@@ -1,19 +1,21 @@
 {
     "DEBUG": true,
     "DATABASE": {
-        "USERNAME": "apadmin",
-        "PASSWORD": "!QAZ2wsx",
-        "HOSTURL": "10.1.2.2",
-        "PORT": "1433",
-        "RDBMS": "mssql",
-        "PYDRIVER": "pyodbc",
+        "USERNAME": "root",
+        "PASSWORD": "Pass@word1",
+        "HOSTURL": "localhost",
+        "PORT": "3306",
+        "RDBMS": "mysql",
+        "PYDRIVER": "pymysql",
         "DB_NAME": "NextBankIBMB",
-        "DB_DRIVER": "ODBC Driver 17 for SQL Server",
-        "DSN": "NCB_IBMB_CHT_SERVER_ODBC17",
+        "DB_DRIVER": null,
+        "DSN": null,
         "ECHO": true
     },
     "SECRET_KEY": "a8e2e324b77189a7f17d1a6c8f8e9a3730a730e1a302d752a621cf5e802201c9",
     "ALLOWED_HOSTS": [
+        "0.0.0.0",
+        "127.0.0.1",
         "localhost",
         "ncb.ngrok.io"
     ],

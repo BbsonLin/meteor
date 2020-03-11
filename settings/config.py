@@ -12,13 +12,13 @@ FILENAME_FORMATTER: 設定檔的檔名格式。
 
 
 APP_CONFIG_NAME = "CHEETAH_ENV"
-FILENAME_FORMATTER = "{env}.config.json"
+FILENAME_FORMATTER = "config.{env}.json"
 
 
 # Config 不同環境版本的設定檔名
 class ConfigEnv(Enum):
-    DEV_MSSQL = "dev-mssql"
-    DEV_MYSQL = "dev-mysql"
+    LOCAL = "local"
+    DEV = "dev"
     PROD = "prod"
 
 

@@ -1,21 +1,24 @@
----
 version: 1
-disable_existing_loggers: False
+disable_existing_loggers: no
 
 formatters:
   simple:
-    format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s' # The default format for asctime is %Y-%m-%d %H:%M:%S
+    format: '%(levelname)s:     [%(name)s] - %(asctime)s - [PID > %(process)d] > %(message)s' # The default format for asctime is %Y-%m-%d %H:%M:%S
+  colored_simple:
+    class: colorlog.ColoredFormatter
+    format: '%(log_color)s%(levelname)s%(reset)s:     %(fg_purple)s[%(name)s]%(reset)s - %(asctime)s - [PID > %(process)d] > %(message)s' # The default format for asctime is %Y-%m-%d %H:%M:%S
   detail:
     format:  | # multiple newline
-            ========> %(asctime)s - %(name)s - %(levelname)s - module > %(module)s (line %(lineno)d) - [pid %(process)d]
-            $> %(message)s
+            * [ %(levelname)s ] === %(asctime)s ======================================= 
+            [ METAINFO ] : [NAME > %(name)s] - [MODULE > %(module)s (line %(lineno)d)] - [PID > %(process)d]
+            [ MESSAGE ]  : %(message)s
     datefmt: ''
 
 handlers:
   debug_console:
     class: logging.StreamHandler
     level: DEBUG
-    formatter: simple
+    formatter: colored_simple
     stream: ext://sys.stdout
 
   debug_fileman:
@@ -45,10 +48,9 @@ loggers:
   cheetah:
     level: DEBUG
     handlers: [debug_console, debug_fileman]
+    propagate: no # 是否把訊息如氣泡一樣也往 parent logger 傳播
 
 # Only exist when no sepcific logger name assgin in getLogger function
 # root:
 #   level: NOTSET
 #   handlers: [console]
-
-...

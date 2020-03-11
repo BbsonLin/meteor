@@ -1,6 +1,6 @@
 import os
 from logging import Logger
-from settings import AppConfig
+from settings import AppConfig, app_config
 from packages.io.logging import LoggerFactory
 
 
