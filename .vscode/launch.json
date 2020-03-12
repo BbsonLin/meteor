@@ -14,12 +14,13 @@
             },
             "module": "uvicorn",
             "args": [
-                // "--workers", "4",
                 "startup:app", 
+                "--workers", "1",
                 "--loop", "uvloop",
                  "--http", "httptools",
-                 "--no-access-log",
-                 "--reload"
+                  "--no-access-log",
+                //  If need VSCode Debugging work, need mark --reload.
+                //  "--reload", 
                  
             ],
             "console": "integratedTerminal",

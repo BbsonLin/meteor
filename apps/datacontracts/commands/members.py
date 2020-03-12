@@ -3,7 +3,7 @@ from dataclasses import dataclass
 
 
 @dataclass(frozen=True)
-class CreateUserCommand(object):
+class CreateMemberCommand(object):
     identity: str
     cellphone: str
     family_name: str
@@ -11,7 +11,7 @@ class CreateUserCommand(object):
 
 
 @dataclass(frozen=True)
-class EditUserCommand(object):
+class EditMemberCommand(object):
     identity: Optional[str] = None
     cellphone: Optional[str] = None
     family_name: Optional[str] = None
@@ -22,3 +22,7 @@ class EditUserCommand(object):
 @dataclass(frozen=True)
 class LoginCommand(object):
     cellphone: str
+
+@dataclass(frozen=True)
+class GetMemberByIdCommand(object):
+    member_id: str
