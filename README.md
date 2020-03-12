@@ -1,6 +1,6 @@
-# cheetah - NextBank IBMB Backend System
+# cheetah
  
-該專案為 NextBank IBMB 的後端系統，此篇文檔將介紹如何啟動該專案。
+該專案為採用 `starlette` 這套非同步框架來實作 Domain-Driven Design 開發的 scaffold，此篇文檔將介紹如何啟動該專案。
 
 
 ## 專案環境
@@ -38,42 +38,8 @@ $cheetah/> pipenv shell # 進入 pipenv 為你建立的虛擬環境
 $(cheetah)cheetah/> # 表示進入到虛擬環境了，如此也能讀到所有安裝的套件與指令
 ```
 
-### 2. 安裝 ngrok
-[ngrok](https://ngrok.com/) 是一套可以協助開發者快速建置，並提供對外測試用的網域的一套工具。
-
-可以透過官網下載並安裝；如為 Mac 用戶，也可以使用 `Homebrew Cask` 來安裝 `ngrok` 。
-
-因為 `ngrok` 的對外網址每次啟動時都會是隨機的，因此若要客製化並固定，需要付費，而以下的 `authtoken` 會連結到固定的 Host 網域 `ncb.ngrok.io`，因此當你安裝好 `ngrok` 後，請透過以下指令連結 `authtoken`：
-
-```bash
-$> ./ngrok http -subdomain=ncb [port] # 請再下載後的 ngrok 執行檔目錄下執行。
-```
-
-如果你的 ngrok 執行檔有寫到環境變數下的話，可以直接在任意位置輸入:
-
-```bash
-$> ngrok http -subdomain=ncb [port] 
-```
-
-因此當啟動該專案的 Local Server 時，Port 設定為 8000，則會是以下指令:
-
-```bash
-$> ngrok http -subdomain=ncb 8000
-```
-
-![啟動 ngrok 產生對外 Host 網域](./images/run-ngrok.png)
-
-
-此時若開啟網頁，輸入 `https://ncb.ngrok.io` 便可以看到 ngrok 顯示的頁面。
-
-![顯示 ngrok 啟動 Workable](./images/show-ngrok-work.png)
-
-因為本機上沒有啟動任何 Server 為 `8000` Port，因此 ngrok tunneling 到本機時會找不到對應的 `localhost:8000` 位置。
-
-接下來我們要啟動專案的 Local Server 來對應上。
-
-### 3. 啟動 IBMB Backend 的 Local Server
-該專案採用 [Starlette](https://www.starlette.io/) 非同步框架，搭配使用 [uvloop](https://uvloop.readthedocs.io/) 與 [httptools[https://github.com/MagicStack/httptools] 作為底層的 ASGI 規範 [Uvicorn](https://www.uvicorn.org/)` 作為 Server，來非同步處理請求。
+### 2. 啟動 Local Server
+該專案採用 [Starlette](https://www.starlette.io/) 非同步框架，搭配使用 [uvloop](https://uvloop.readthedocs.io/) 與 [httptools](https://github.com/MagicStack/httptools) 作為底層的 ASGI 規範 [Uvicorn](https://www.uvicorn.org/) 作為 Server，來非同步處理請求。
 
 因此在本機啟動 Uvicorn 的 Server 時，需要仰賴 `uvicorn` 的指令，以下有兩種方式可以執行：
 
@@ -102,3 +68,4 @@ $(cheetah)cheetah> uvicorn startup:app --workers=1 --loop=uvloop --http=httptool
 便能看到如下圖的執行畫面：
 
 ![在終端機執行](./images/show-server-run-terminal.png)
+
