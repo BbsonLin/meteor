@@ -21,7 +21,7 @@
     ],
     "LOGGER": {
         "FILENAME": "logging",
-        "LOGGER_NAME": "cheetah"
+        "LOGGER_NAME": "meteor"
     },
     "ALLOW_ORIGINS": [
         "*"

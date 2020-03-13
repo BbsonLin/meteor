@@ -4,7 +4,7 @@ from settings import AppConfig, app_config
 from packages.io.logging import LoggerFactory
 
 
-class CheetahLogger(object):
+class MeteorLogger(object):
     @classmethod
     def create(cls, config: AppConfig) -> Logger:
         # Read config filename and path
