@@ -3,7 +3,7 @@
 # Created by https://www.gitignore.io/api/visualstudiocode,macos,python,virtualenv
 # Edit at https://www.gitignore.io/?templates=visualstudiocode,macos,python,virtualenv
 
-#### Cheetah
+#### Meteor
 logs/*
 
 ### macOS ###

@@ -25,7 +25,7 @@ handlers:
     class: logging.handlers.TimedRotatingFileHandler
     level: DEBUG
     formatter: detail
-    filename: logs/cheetah-debug.log
+    filename: logs/meteor-debug.log
     when: h
     interval: 24
     backupCount: 20
@@ -36,7 +36,7 @@ handlers:
   #   class: logging.handlers.TimedRotatingFileHandler
   #   level: WARNING
   #   formatter: detail
-  #   filename: logs/cheetah-error.log
+  #   filename: logs/meteor-error.log
   #   when: h
   #   interval: 24
   #   backupCount: 20
@@ -45,7 +45,7 @@ handlers:
 
  
 loggers:
-  cheetah:
+  meteor:
     level: DEBUG
     handlers: [debug_console, debug_fileman]
     propagate: no # 是否把訊息如氣泡一樣也往 parent logger 傳播

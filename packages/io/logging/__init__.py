@@ -7,4 +7,4 @@ from .factory import LoggerFactory
 
 # factory = LoggerFactory()
 # factory.load_config(logging_conf)
-# scraping_logger = factory.get_logger("cheetah")
+# scraping_logger = factory.get_logger("meteor")
