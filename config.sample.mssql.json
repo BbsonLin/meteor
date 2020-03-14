@@ -1,9 +1,15 @@
 {
     "DEBUG": true,
+    "REDIS_CONF": {
+        "HOSTURL": "localhost",
+        "PORT": 6379,
+        "DBNO": 0,
+        "PWD": "redIs@ncb"
+    },
     "DATABASE": {
         "USERNAME": "apadmin",
         "PASSWORD": "!QAZ2wsx",
-        "HOSTURL": "10.1.2.2",
+        "HOSTURL": "127.0.0.1",
         "PORT": "1433",
         "RDBMS": "mssql",
         "PYDRIVER": "pyodbc",
@@ -20,7 +26,7 @@
     ],
     "LOGGER": {
         "FILENAME": "logging",
-        "LOGGER_NAME": "cheetah"
+        "LOGGER_NAME": "meteor"
     },
     "ALLOW_ORIGINS": [
         "*"

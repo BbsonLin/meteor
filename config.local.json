@@ -1,5 +1,11 @@
 {
     "DEBUG": true,
+    "REDIS_CONF": {
+        "HOSTURL": "localhost",
+        "PORT": 6379,
+        "DBNO": 0,
+        "PWD": "redIs@ncb"
+    },
     "DATABASE": {
         "USERNAME": "root",
         "PASSWORD": "Pass@word1",
@@ -7,7 +13,7 @@
         "PORT": "3306",
         "RDBMS": "mysql",
         "PYDRIVER": "pymysql",
-        "DB_NAME": "NextBankIBMB",
+        "DB_NAME": "metetor_sample",
         "DB_DRIVER": null,
         "DSN": null,
         "ECHO": true
@@ -21,7 +27,7 @@
     ],
     "LOGGER": {
         "FILENAME": "logging",
-        "LOGGER_NAME": "cheetah"
+        "LOGGER_NAME": "meteor"
     },
     "ALLOW_ORIGINS": [
         "*"

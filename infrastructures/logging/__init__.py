@@ -1,5 +1,5 @@
 from settings import app_config
-from .factory import CheetahLogger
+from .factory import MeteorLogger
 
 
-cheetah_logger = CheetahLogger.create(app_config)
+meteor_logger = MeteorLogger.create(app_config)

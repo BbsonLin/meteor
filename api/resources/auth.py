@@ -4,7 +4,7 @@ from starlette.routing import Route, Mount
 from starlette.endpoints import HTTPEndpoint
 from starlette.responses import UJSONResponse
 from api.validators.auth import MemberLoginValidator
-from infrastructures.logging import cheetah_logger
+from infrastructures.logging import meteor_logger
 from packages.webargs import parse_requests
 
 
