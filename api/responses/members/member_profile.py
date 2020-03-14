@@ -4,7 +4,7 @@ from marshmallow import fields
 from packages.marshmallow import DumpSchema
 
 
-class MemberResponse(DumpSchema):
+class MemberProfileResp(DumpSchema):
     member_id = fields.String(data_key="member_id", dump_only=True)
     identity = fields.String(data_key="identity", dump_only=True)
     cellphone = fields.String(data_key="cellphone", dump_only=True)

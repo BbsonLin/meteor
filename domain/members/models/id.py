@@ -1,4 +1,5 @@
 import traceback
+from uuid import UUID
 from datetime import datetime
 from typing import TypeVar, Type, cast
 from domain.common import EntityId
@@ -8,60 +9,44 @@ from domain.members.errors import MemberErrorCode
 
 class MemberId(EntityId):
     code = "MEM"
-    datetime_format = "%Y%m%d%H%M%S"
 
-    def __init__(self, serial_no: int, createtd_at: datetime) -> None:
+    def __init__(self, uuid: UUID) -> None:
         # TODO: 客製化 Error Code 與 Message
-        self._serial_no = self._check_serial_no(serial_no)
-        self._createtd_at = createtd_at
+        self._uuid = uuid
         super(MemberId, self).__init__(self._make_identifier())
 
     @classmethod
     def translate(cls, source: str) -> "MemberId":
-        CODE_IDX = 0
-        CREATED_TIME_IDX = 1
-        SERIAL_NO_IDX = 2
+        TOTAL_SIZE, CODE_SIZE = 35, 3
+        if len(source) != TOTAL_SIZE or source[:CODE_SIZE] != cls.code:
+            raise DomainException(MemberErrorCode.MEMBER_ID_FORMAT_ERROR)
 
-        if len(source.split("-")) != 3:
-            raise DomainException(MemberErrorCode.MEMBER_ID_FORMAT_INCORRECT)
-
-        slices = source.split("-")
-        if slices[CODE_IDX] != cls.code:
-            raise DomainException(MemberErrorCode.MEMBER_ID_FORMAT_INCORRECT)
-        created_at = datetime.strptime(slices[CREATED_TIME_IDX], cls.datetime_format)
-        return cls(int(slices[SERIAL_NO_IDX]), created_at)
+        uuid_slice = source[CODE_SIZE:]
+        return cls(UUID(uuid_slice))
 
     @property
-    def serial_no(self) -> int:
-        return self._serial_no
-
-    @property
-    def createtd_at(self) -> datetime:
-        return self._createtd_at
-
-    def _check_serial_no(self, serial_no: int) -> int:
-        if serial_no < 0:
-            raise DomainException(MemberErrorCode.MEMBER_SEIRAL_NO_INCORRECT, stack_trace=traceback.format_exc())
-        return serial_no
+    def uuid(self) -> UUID:
+        return self._uuid
 
     def _make_identifier(self):
-        createtd_date = self.createtd_at.strftime(self.datetime_format)
-        return "{code}-{date}-{sn}".format(code=self.code, date=createtd_date, sn=self.serial_no)
+        uuid_hex = self.uuid.hex
+        return "{code}{uuid_hex}".format(code=self.code, uuid_hex=uuid_hex)
 
     def __eq__(self, other: object) -> bool:
         if type(self) is type(other):
             return False
         other = cast(MemberId, other)
-        return (self.code, self.createtd_at, self.serial_no) == \
-            (other.code, other.createtd_at, other.serial_no)
+        return (self.code, self.uuid) == (other.code, other.uuid)
 
     def __hash__(self) -> int:
-        return hash((self.code, self.createtd_at, self.serial_no))
+        return hash((self.code, self.uuid))
 
     def __str__(self) -> str:
         # 取得字串型別的 Entity Id
         return self._make_identifier()
 
     def __repr__(self) -> str:
-        return "<{class}: code={code}, createtd_at={date}, serial_no={sn}>" \
-            .format(type(self).__name__, code=self.code, date=self.createtd_at, sn=self.serial_no)
+        return "<{class_name}: code={code}, uuid_hex={uuid_hex}>" \
+            .format(class_name=type(self).__name__,
+                    code=self.code,
+                    uuid_hex=self.uuid)

@@ -4,9 +4,15 @@ from .id import MemberId
 
 
 class MemberDO(object):
-    def __init__(self, id: MemberId, identity: str, cellphone: str, family_name: str, given_name: str) -> None:
+    def __init__(self,
+                 id: MemberId,
+                 identity_no: str,
+                 cellphone: str,
+                 family_name: str,
+                 given_name: str) -> None:
+
         self._id = id
-        self._identity = identity
+        self._identity_no = identity_no
         self._cellphone = cellphone
         self._family_name = family_name
         self._given_name = given_name
@@ -16,8 +22,8 @@ class MemberDO(object):
         return self._id
 
     @property
-    def identity(self) -> str:
-        return self._identity
+    def identity_no(self) -> str:
+        return self._identity_no
 
     @property
     def cellphone(self) -> str:
@@ -35,9 +41,9 @@ class MemberDO(object):
         if cellphone:
             self._cellphone = cellphone
 
-    def change_identity(self, identity: Optional[str]):
-        if identity:
-            self._identity = identity
+    def change_identity_no(self, identity_no: Optional[str]):
+        if identity_no:
+            self._identity_no = identity_no
 
     def __eq__(self, other: object) -> bool:
         # 使用 is 判斷引用是否一致，等同 id(self) == id(other)，半段引用的記憶體位置，此外因為是可改變狀態，所以不用覆寫 __hash__
@@ -47,12 +53,12 @@ class MemberDO(object):
 
     def __repr__(self) -> str:
         return "<MemberDO: id:{}, \n\
-                identity={}, \n\
+                identity_no={}, \n\
                 cellphone={}, \n\
                 family_name={}, \n\
                 given_name={}>" \
             .format(self.id,
-                    self.identity,
+                    self.identity_no,
                     self.cellphone,
                     self.family_name,
                     self.given_name)

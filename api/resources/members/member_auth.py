@@ -3,8 +3,8 @@ from starlette.requests import Request
 from starlette.routing import Route, Mount
 from starlette.endpoints import HTTPEndpoint
 from starlette.responses import UJSONResponse
-from api.validators.auth import MemberLoginValidator
-from infrastructures.logging import meteor_logger
+from api.validators.members import MemberLoginValidator
+from infrastructures.logging import meteor_logman
 from packages.webargs import parse_requests
 
 

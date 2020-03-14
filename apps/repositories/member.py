@@ -1,3 +1,4 @@
+from uuid import uuid1
 from datetime import datetime
 from sqlalchemy.sql import func
 from sqlalchemy.sql.expression import false
@@ -15,8 +16,8 @@ class MemberRepository(IMemberRepository):
 
     def _assemble_to(self, db_member: Member) -> MemberDO:
         return MemberDO(
-            id=MemberId.translate(db_member.member_id),
-            identity=db_member.identity,
+            id=MemberId.translate(db_member.id),
+            identity_no=db_member.identity_no,
             cellphone=db_member.cellphone,
             family_name=db_member.family_name,
             given_name=db_member.given_name
@@ -24,9 +25,9 @@ class MemberRepository(IMemberRepository):
 
     def save(self, member: MemberDO) -> bool:
         args = {
-            "member_id": str(member.id),
+            "id": str(member.id),
             "cellphone": member.cellphone,
-            "identity": member.identity,
+            "identity_no": member.identity_no,
             "family_name": member.family_name,
             "given_name": member.given_name
         }
@@ -35,10 +36,10 @@ class MemberRepository(IMemberRepository):
         self._db_session.flush()
         return True
 
-    def get_by(self, member_id: MemberId) -> MemberDO:
+    def get_by(self, mem_id: MemberId) -> MemberDO:
         db_member: Member = self._db_session.query(Member).filter(
-            Member.member_id == str(member_id),
-            Member.is_archived == false()
+            Member.id == str(mem_id),
+            Member.is_deleted == false()
         ).scalar()
 
         if db_member is None:
@@ -47,8 +48,4 @@ class MemberRepository(IMemberRepository):
         return self._assemble_to(db_member)
 
     def generate_id(self) -> MemberId:
-        max_id = self._db_session.query(func.count(Member.member_id)).scalar()
-        # 如果 為 NONE 表示沒有資料，則建立 0
-        curr_id = max_id + 1 if max_id is not None else 1
-        return MemberId(curr_id, datetime.utcnow())
-
+        return MemberId(uuid1())

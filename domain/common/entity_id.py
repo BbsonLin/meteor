@@ -5,8 +5,6 @@ from .valueobj import ValueObject
 
 
 class EntityId(ValueObject):
-    DATETIME_FORMAT = "%Y%m%d%H%M%S"
-
     @abc.abstractmethod
     def __init__(self, identifier: str) -> None:
         self._identifier = identifier
@@ -15,9 +13,8 @@ class EntityId(ValueObject):
     def identifier(self) -> str:
         return self._identifier
 
-
     # def __eq__(self, other: object) -> bool:
-    #     if type(self) is type(other):
+    #     if type(self) != type(other):
     #         return False
     #     other = cast(EntityId, other)
     #     return (self.code, self.createtd_at, self.serial_no) == \

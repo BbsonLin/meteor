@@ -4,12 +4,12 @@ from starlette.routing import Route, Mount
 from starlette.endpoints import HTTPEndpoint
 from starlette.responses import UJSONResponse
 from api.validators.members import CreateMemberValidator, EditMemberValidator
-from api.responses.members import MemberResponse
-from apps.datacontracts.commands import CreateMemberCommand, EditMemberCommand
-from apps.datacontracts.commands import GetMemberByIdCommand
-from apps.datacontracts.results import MemberResult, MemberLoginResult
-from apps.services.members import member_service
-from infrastructures.logging import meteor_logger
+from api.responses.members import MemberProfileResp
+from apps.datacontracts.commands.members import CreateMemberCmd, EditMemberCmd
+from apps.datacontracts.commands.members import GetMemberByIdCmd
+from apps.datacontracts.results.members import MemberProfileRst, MemberLoginRst
+from apps.services.members import member_profile_service
+from infrastructures.logging import meteor_logman
 from packages.webargs import parse_requests
 
 
@@ -20,10 +20,10 @@ class MembersAPIResource(HTTPEndpoint):
 
     @parse_requests(CreateMemberValidator())
     async def post(self, request: Request, reqargs: dict) -> UJSONResponse:
-        # meteor_logger.info(reqargs)
-        command = CreateMemberCommand(**reqargs)
-        result: MemberResult = member_service.create(command)
-        resp = MemberResponse().dump(result)
+        # meteor_logman.info(reqargs)
+        command = CreateMemberCmd(**reqargs)
+        result: MemberProfileRst = member_profile_service.create(command)
+        resp = MemberProfileResp().dump(result)
         return UJSONResponse({
             "success": True,
             "data": resp
@@ -32,14 +32,14 @@ class MembersAPIResource(HTTPEndpoint):
 
 class MemberAPIResource(HTTPEndpoint):
     async def get(self, request: Request) -> UJSONResponse:
-        command = GetMemberByIdCommand(**request.path_params)
-        result: MemberResult = member_service.get(command)
-        resp = MemberResponse().dump(result)
+        command = GetMemberByIdCmd(**request.path_params)
+        result: MemberProfileRst = member_profile_service.get(command)
+        resp = MemberProfileResp().dump(result)
         return UJSONResponse(resp)
 
     @parse_requests(EditMemberValidator())
     async def patch(self, request: Request, reqargs: dict) -> UJSONResponse:
-        command = EditMemberCommand(**reqargs)
+        command = EditMemberCmd(**reqargs)
         return UJSONResponse({
             "data": reqargs,
             "member_id": request.path_params["member_id"]

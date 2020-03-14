@@ -3,26 +3,22 @@ from dataclasses import dataclass
 
 
 @dataclass(frozen=True)
-class CreateMemberCommand(object):
-    identity: str
+class CreateMemberCmd(object):
+    identity_no: str
     cellphone: str
     family_name: str
     given_name: str
 
 
 @dataclass(frozen=True)
-class EditMemberCommand(object):
-    identity: Optional[str] = None
+class EditMemberCmd(object):
+    identity_no: Optional[str] = None
     cellphone: Optional[str] = None
     family_name: Optional[str] = None
     given_name: Optional[str] = None
-    is_archived: Optional[bool] = None
+    is_deleted: Optional[bool] = None
 
 
 @dataclass(frozen=True)
-class LoginCommand(object):
-    cellphone: str
-
-@dataclass(frozen=True)
-class GetMemberByIdCommand(object):
+class GetMemberByIdCmd(object):
     member_id: str

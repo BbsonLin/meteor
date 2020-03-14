@@ -1,9 +1,9 @@
-from apps.datacontracts.commands import CreateMemberCommand
-from apps.datacontracts.commands import EditMemberCommand
-from apps.datacontracts.commands import GetMemberByIdCommand
-from apps.datacontracts.commands import LoginCommand
-from apps.datacontracts.results import MemberResult
-from apps.datacontracts.results import MemberLoginResult
+from apps.datacontracts.commands.members import CreateMemberCmd
+from apps.datacontracts.commands.members import EditMemberCmd
+from apps.datacontracts.commands.members import GetMemberByIdCmd
+from apps.datacontracts.commands.members import MemberLoginCmd
+from apps.datacontracts.results.members import MemberProfileRst
+from apps.datacontracts.results.members import MemberLoginRst
 from apps.repositories.member import MemberRepository
 from domain.members.models import MemberDO, MemberId
 from infrastructures.persistences.sqlalchemy.middlewares import database_adapter
@@ -17,40 +17,40 @@ class MemberProfileService(object):
         pass
 
     @transaction_scope
-    def create(self, command: CreateMemberCommand) -> MemberResult:
+    def create(self, command: CreateMemberCmd) -> MemberProfileRst:
         member_id: MemberId = self._member_repository.generate_id()
         member = MemberDO(member_id,
-                          command.identity,
+                          command.identity_no,
                           command.cellphone,
                           command.family_name,
                           command.given_name)
         self._member_repository.save(member)
-        return MemberResult(
+        return MemberProfileRst(
             member_id=str(member_id),
-            identity=command.identity,
+            identity_no=command.identity_no,
             cellphone=command.cellphone,
             family_name=command.family_name,
             given_name=command.given_name
         )
 
     @transaction_scope
-    def edit(self, command: EditMemberCommand):
+    def edit(self, command: EditMemberCmd):
         pass
 
     @transaction_scope
-    def login(self, command: LoginCommand):
+    def login(self, command: MemberLoginCmd):
         pass
 
-    def get(self, command: GetMemberByIdCommand) -> MemberResult:
+    def get(self, command: GetMemberByIdCmd) -> MemberProfileRst:
         member_id: MemberId = MemberId.translate(command.member_id)
         member: MemberDO = self._member_repository.get_by(member_id)
-        return MemberResult(
+        return MemberProfileRst(
             member_id=str(member.id),
-            identity=member.identity,
+            identity_no=member.identity_no,
             cellphone=member.cellphone,
             family_name=member.family_name,
             given_name=member.given_name
         )
 
 
-member_service = MemberProfileService()
+member_profile_service = MemberProfileService()
