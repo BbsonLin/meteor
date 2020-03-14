@@ -1,4 +1,6 @@
+import json
 from enum import Enum
+from collections import namedtuple
 from typing import List, Optional
 from dataclasses import dataclass
 from dataclasses_json import DataClassJsonMixin
@@ -75,9 +77,19 @@ class LoggerConfig(DataClassJsonMixin):
 
 
 @dataclass
+class RedisConfig(DataClassJsonMixin):
+    HOSTURL: str
+    PORT: str
+    # Database number
+    DBNO: str
+    PWD: Optional[str] = None
+
+
+@dataclass
 class AppConfig(DataClassJsonMixin):
     DEBUG: bool
     DATABASE: DatabaseConfig
+    REDIS_CONF: RedisConfig
     ALLOWED_HOSTS: List[str]
     LOGGER: LoggerConfig
     ALLOW_ORIGINS: List[str]
