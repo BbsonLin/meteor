@@ -9,6 +9,8 @@ flake8 = "*"
 pytest-cov = "*"
 assertpy = "*"
 fakeredis = "*"
+faker = "*"
+mimesis = "*"
 
 [packages]
 starlette = "*"

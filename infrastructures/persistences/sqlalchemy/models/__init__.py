@@ -1,2 +1,2 @@
-from .common import SystemInfo, Base
-from .member import Member
+from .common import CommSysInfo, Base
+from .members import MemberProfile
