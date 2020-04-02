@@ -4,27 +4,28 @@ from apps.datacontracts.commands.members import GetMemberByIdCmd
 from apps.datacontracts.commands.members import MemberLoginCmd
 from apps.datacontracts.results.members import MemberProfileRst
 from apps.datacontracts.results.members import MemberLoginRst
-from apps.repositories.members import MemberProfileRepository
+from apps.repositories.members import member_profile_repository
+from domain.members.repositories import IMemberProfileRepository
 from domain.members.models import MemberProfileDO, MemberId
 from infrastructures.persistences.sqlalchemy.middlewares import database_adapter
 from infrastructures.persistences.sqlalchemy.middlewares import transaction_scope
 
 
 class MemberProfileService(object):
-    _member_repository: MemberProfileRepository = MemberProfileRepository(database_adapter.session)
+    _member_profile_repository: IMemberProfileRepository = member_profile_repository
 
     def __init__(self) -> None:
         pass
 
     @transaction_scope
     def create(self, command: CreateMemberCmd) -> MemberProfileRst:
-        member_id: MemberId = self._member_repository.generate_id()
+        member_id: MemberId = self._member_profile_repository.generate_id()
         member = MemberProfileDO(member_id,
                                  command.identity_no,
                                  command.cellphone,
                                  command.family_name,
                                  command.given_name)
-        self._member_repository.save(member)
+        self._member_profile_repository.save(member)
         return MemberProfileRst(
             member_id=str(member_id),
             identity_no=command.identity_no,
@@ -39,7 +40,7 @@ class MemberProfileService(object):
 
     def get(self, command: GetMemberByIdCmd) -> MemberProfileRst:
         member_id: MemberId = MemberId.translate(command.member_id)
-        member: MemberProfileDO = self._member_repository.get_by(member_id)
+        member: MemberProfileDO = self._member_profile_repository.get_by(member_id)
         return MemberProfileRst(
             member_id=str(member.id),
             identity_no=member.identity_no,
