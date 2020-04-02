@@ -1,6 +1,6 @@
 import sys
 import logging
-from domain.common import DomainException
+from domain.baseclass import DomainException
 from starlette.requests import Request
 from starlette_context import context
 from starlette.responses import Response
