@@ -8,8 +8,7 @@ from starlette_context.middleware import ContextMiddleware
 from starlette.middleware.cors import CORSMiddleware
 from starlette.middleware.sessions import SessionMiddleware
 from starlette.middleware.httpsredirect import HTTPSRedirectMiddleware
-from api.resources.members import members_profile_routes
-from api.resources.auth import member_auth_routes
+from api.resources.members import members_profile_routes, member_auth_routes
 from infrastructures.errors import ExceptHandlerMiddleware
 from infrastructures.persistences.sqlalchemy.middlewares import database_adapter, SQLAlchemyAdapter
 from infrastructures.persistences.sqlalchemy.middlewares import SQLAlchemySessionMiddleware

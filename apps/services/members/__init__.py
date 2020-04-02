@@ -1,0 +1,1 @@
+from .member_profile import member_profile_service, MemberProfileService
