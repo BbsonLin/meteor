@@ -1,1 +1,1 @@
-from .member import IMemberRepository
+from .member_profile import IMemberProfileRepository

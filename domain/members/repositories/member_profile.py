@@ -1,15 +1,15 @@
 import abc
-from domain.members.models import MemberDO, MemberId
+from domain.members.models import MemberProfileDO, MemberId
 
 
-class IMemberRepository(abc.ABC):
+class IMemberProfileRepository(abc.ABC):
 
     @abc.abstractmethod
-    def save(self, order: MemberDO) -> bool:
+    def save(self, order: MemberProfileDO) -> bool:
         raise NotImplementedError()
 
     @abc.abstractmethod
-    def get_by(self, id: MemberId) -> MemberDO:
+    def get_by(self, id: MemberId) -> MemberProfileDO:
         raise NotImplementedError()
 
     @abc.abstractmethod

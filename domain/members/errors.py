@@ -1,4 +1,4 @@
-from domain.common import DomainErrorCode
+from domain.baseclass import DomainErrorCode
 
 
 class MemberErrorCode(DomainErrorCode):

@@ -2,8 +2,8 @@ import traceback
 from uuid import UUID
 from datetime import datetime
 from typing import TypeVar, Type, cast
-from domain.common import EntityId
-from domain.common import DomainException
+from domain.baseclass import EntityId
+from domain.baseclass import DomainException
 from domain.members.errors import MemberErrorCode
 
 
@@ -33,7 +33,7 @@ class MemberId(EntityId):
         return "{code}{uuid_hex}".format(code=self.code, uuid_hex=uuid_hex)
 
     def __eq__(self, other: object) -> bool:
-        if type(self) is type(other):
+        if type(self) != type(other):
             return False
         other = cast(MemberId, other)
         return (self.code, self.uuid) == (other.code, other.uuid)

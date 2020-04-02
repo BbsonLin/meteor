@@ -1,9 +1,9 @@
-from typing import Optional
+from typing import Optional, cast
 from datetime import datetime
-from .id import MemberId
+from .member_id import MemberId
 
 
-class MemberDO(object):
+class MemberProfileDO(object):
     def __init__(self,
                  id: MemberId,
                  identity_no: str,
@@ -46,13 +46,13 @@ class MemberDO(object):
             self._identity_no = identity_no
 
     def __eq__(self, other: object) -> bool:
-        # 使用 is 判斷引用是否一致，等同 id(self) == id(other)，半段引用的記憶體位置，此外因為是可改變狀態，所以不用覆寫 __hash__
         if type(self) != type(other):
             return False
+        # 使用 is 判斷引用是否一致，等同 id(self) == id(other)，判斷引用的記憶體位置，此外因為是可改變狀態，所以不用覆寫 __hash__
         return self is other
 
     def __repr__(self) -> str:
-        return "<MemberDO: id:{}, \n\
+        return "<MemberProfileDO: id:{}, \n\
                 identity_no={}, \n\
                 cellphone={}, \n\
                 family_name={}, \n\
